@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,7 +11,10 @@ options.page_load_strategy = 'eager'
 login_url = 'https://shopee.co.id/buyer/login?from=https%3A%2F%2Fshopee.co.id%2F&next=https%3A%2F%2Fshopee.co.id%2F'
 
 def purchase(phone, password, item_url):
-    driver = webdriver.Firefox(executable_path = '/usr/local/bin/geckodriver', options = options)
+    # Lokasi GeckoDriver
+    s = Service("/usr/local/bin/geckodriver")
+    driver = webdriver.Firefox(service = s)
+    wait = WebDriverWait(driver, 10)
     wait = WebDriverWait(driver, 10)
 
     driver.get(login_url)
